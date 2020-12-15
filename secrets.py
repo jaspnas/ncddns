@@ -1,3 +1,3 @@
-password = 
-domain = 
-hosts = [] #Has to be a list
+password = ""
+domain = ""
+hosts = [""] #Has to be a list
