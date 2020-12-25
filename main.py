@@ -9,6 +9,14 @@ class Updater():
         URL = "https://dynamicdns.park-your-domain.com/update"
         ip = rq.get('https://api.ipify.org').text
 
+        LASTIP = open("lastip.txt", "r").read()
+
+        if ip == LASTIP:
+            print("lastip==ip")
+            return
+
+        Updater().writeip(ip)
+
         for x in hosts:
             PARAMS = {
                 "host":x,
@@ -19,6 +27,11 @@ class Updater():
 
             rq.get(url=URL, params=PARAMS)
             #print(r.text)
+
+    def writeip(self, lastip):
+        f = open("lastip.txt", "w")
+        f.write(lastip)
+        f.close
 
 app = Updater()
 app.request()
